@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TestProject</string>
+    <string name="no_network_error">Network is unawailable. Please check settings.</string>
+    <string name="user_list">User list</string>
+    <string name="contact_list">Contact list</string>
+    <string name="text1">Mom filter</string>
+    <string name="text2">Choose your\nfriends-to-be</string>
+
+    <string name="address_book">Address book</string>
+    <string name="other_methods">Other methods</string>
+
+</resources>
