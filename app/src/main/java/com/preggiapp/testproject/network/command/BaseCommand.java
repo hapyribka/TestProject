@@ -1,23 +1,21 @@
 package com.preggiapp.testproject.network.command;
 
-import com.preggiapp.testproject.network.callbacks.FragmentCallBack;
-import com.preggiapp.testproject.network.response.BaseResponse;
 import com.preggiapp.testproject.network.service.RetrofitService;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public abstract class BaseCommand {
+public class BaseCommand {
 
     final static String SERVICE_URL = "http://www.mocky.io/";
-    public FragmentCallBack callback;
+    public static final String API_VERSION = "v2";
+
     public OkHttpClient.Builder httpClient;
     public Retrofit retrofit;
     public RetrofitService service;
 
-    public BaseCommand(FragmentCallBack callback) {
-        this.callback = callback;
+    public BaseCommand() {
         initRetrofit();
     }
 
@@ -35,16 +33,4 @@ public abstract class BaseCommand {
                 .build();
         service = retrofit.create(RetrofitService.class);
     }
-
-    public boolean checkErrors(BaseResponse resp) {
-        if(resp.getError() != null) {
-            if(callback != null) {
-                callback.onLoadFinished(resp.getError());
-            }
-            return true;
-        }
-        return false;
-    }
-
-    public abstract void execute();
 }

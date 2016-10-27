@@ -1,8 +1,7 @@
-package com.preggiapp.testproject.fragment;
+package com.preggiapp.testproject.gui.userlist;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +37,6 @@ public class ImageFragment extends Fragment {
             TextView name = (TextView) commonView .findViewById(R.id.name);
             TextView code = (TextView) commonView .findViewById(R.id.code);
             TextView address = (TextView) commonView .findViewById(R.id.address);
-            Log.i("ImFr", "user - " + user);
             if(user.getLogin() != null) {
                 name.setText(user.getLogin());
             }
@@ -48,8 +46,6 @@ public class ImageFragment extends Fragment {
             if(user.getPregnancy_settings() != null) {
                 code.setText(user.getPregnancy_settings().getPregnancy()+"");
             }
-            Log.i("ImFr", "user.id - " + user.getId()+"  "+size+" x  "+size);
-            Log.i("ImFr", "user.getAvatar().getFull_url() - " + user.getAvatar().getFull_url());
             Picasso.with(getActivity()).load(user.getAvatar().getFull_url()).resize(size, size).centerCrop().memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(photo);
         }
         return commonView;

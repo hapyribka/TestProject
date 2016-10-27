@@ -1,26 +1,20 @@
-package com.preggiapp.testproject.fragment;
+package com.preggiapp.testproject.gui.contactlist;
 
+import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import com.preggiapp.testproject.R;
-import com.preggiapp.testproject.activity.MainActivity;
-import com.preggiapp.testproject.adapter.ContactAdapter;
-import com.preggiapp.testproject.data.AppData;
+import com.preggiapp.testproject.gui.base.BasePresenter;
 import com.preggiapp.testproject.model.Contact;
 import org.apache.commons.validator.routines.EmailValidator;
 import java.util.ArrayList;
 
-public class ContactListFragment extends BaseConnectionFragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class ContactListPresenter extends BasePresenter<ContactListMvpView> implements  LoaderManager.LoaderCallbacks<Cursor> {
 
     final static String SORT_ORDER = ContactsContract.Contacts.SORT_KEY_PRIMARY;
 
@@ -36,33 +30,10 @@ public class ContactListFragment extends BaseConnectionFragment implements Loade
             ContactsContract.CommonDataKinds.Email.ADDRESS + " IS NOT NULL";
 
 
-    private ContactAdapter adapter;
-    private RecyclerView list;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        commonView = inflater.inflate(R.layout.contactlist_fragment, container, false);
-        list = (RecyclerView)commonView.findViewById(R.id.list);
-        list.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        list.setLayoutManager(llm);
-        return commonView;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((MainActivity)getActivity()).enableBackButton();
-        getActivity().getSupportLoaderManager().initLoader(666, Bundle.EMPTY, this);
-    }
-
-    @Override
-    public void update() {
-        if(AppData.getInstance().getContactList() != null) {
-            adapter = new ContactAdapter(getActivity(), AppData.getInstance().getContactList());
-            list.setAdapter(adapter);
-        }
+    public void attachView(ContactListMvpView mvpView) {
+        super.attachView(mvpView);
+        startProgressDialog();
+        ((Fragment)getMvpView()).getActivity().getSupportLoaderManager().initLoader(666, Bundle.EMPTY, this);
     }
 
     @Override
@@ -78,9 +49,8 @@ public class ContactListFragment extends BaseConnectionFragment implements Loade
                 Log.i("ContactListFr", "Contact: " + arr[0] + " | " + arr[1] + " | " + arr[2] + " | " + arr[3]);
             }
         }
-        AppData.getInstance().setContactList(array);
+        getMvpView().updateList(array);
         stopProgressDialog();
-        update();
     }
 
     @Override
@@ -93,7 +63,7 @@ public class ContactListFragment extends BaseConnectionFragment implements Loade
         startProgressDialog();
         CursorLoader loader =
                 new CursorLoader(
-                        getActivity(),
+                        getContext(),
                         ContactsContract.Data.CONTENT_URI,
                         PROJECTION,
                         SELECTION,

@@ -1,9 +1,9 @@
-package com.preggiapp.testproject.adapter;
+package com.preggiapp.testproject.gui.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import com.preggiapp.testproject.fragment.ImageFragment;
+import com.preggiapp.testproject.gui.userlist.ImageFragment;
 import com.preggiapp.testproject.model.User;
 import java.util.ArrayList;
 
@@ -11,9 +11,13 @@ public class UserPageAdapter extends FragmentPagerAdapter {
 
     private ArrayList<User> userList;
 
-    public UserPageAdapter(FragmentManager fm, ArrayList<User> userList) {
+    public UserPageAdapter(FragmentManager fm) {
         super(fm);
-        this.userList = userList;
+    }
+
+    public void setItems( ArrayList<User> users) {
+        userList = users;
+        notifyDataSetChanged();
     }
 
     @Override

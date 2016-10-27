@@ -1,4 +1,4 @@
-package com.preggiapp.testproject.adapter;
+package com.preggiapp.testproject.gui.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -17,9 +17,13 @@ public class ContactAdapter extends  RecyclerView.Adapter<ContactAdapter.CallVie
     private ArrayList<Contact> items;
     private Context context;
 
-    public ContactAdapter(Context context, ArrayList<Contact> items) {
+    public ContactAdapter(Context context) {
         this.context = context;
+    }
+
+    public void setItems(ArrayList<Contact> items) {
         this.items = items;
+        notifyDataSetChanged();
     }
 
     static class CallViewHolder extends RecyclerView.ViewHolder {

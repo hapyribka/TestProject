@@ -1,17 +1,16 @@
-package com.preggiapp.testproject.activity;
+package com.preggiapp.testproject.gui.activity;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.preggiapp.testproject.R;
-import com.preggiapp.testproject.fragment.ContactListFragment;
-import com.preggiapp.testproject.fragment.UserListFragment;
+import com.preggiapp.testproject.gui.contactlist.ContactListFragment;
+import com.preggiapp.testproject.gui.userlist.UserListFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         commonMenu = menu;
-        enableSearchButton();
+        enableContactsButton();
         return true;
     }
 
@@ -42,25 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.action_contacts:
                     addFragment(new ContactListFragment());
-                break;
-
-            case R.id.action_search:
-                    MenuItem myActionMenuItem = commonMenu.findItem(R.id.action_search);
-                    final SearchView searchView = (SearchView) myActionMenuItem.getActionView();
-                    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                        @Override
-                        public boolean onQueryTextSubmit(String query) {
-                            if (!searchView.isIconified()) {
-                                searchView.setIconified(true);
-                            }
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onQueryTextChange(String search) {
-                        return false;
-                    }
-                    });
                 break;
         }
         return true;
@@ -82,10 +62,10 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
-    public void enableSearchButton() {
+    public void enableContactsButton() {
         clearMenu();
         if(commonMenu != null) {
-            getMenuInflater().inflate(R.menu.search, commonMenu);
+            getMenuInflater().inflate(R.menu.contacts, commonMenu);
         }
     }
 

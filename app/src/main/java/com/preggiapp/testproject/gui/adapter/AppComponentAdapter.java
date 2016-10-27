@@ -1,4 +1,4 @@
-package com.preggiapp.testproject.adapter;
+package com.preggiapp.testproject.gui.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,8 +14,9 @@ public class AppComponentAdapter extends  RecyclerView.Adapter<AppComponentAdapt
 
     private ArrayList<AppComponent> items;
 
-    public AppComponentAdapter(ArrayList<AppComponent> items) {
+    public void setItems(ArrayList<AppComponent> items) {
         this.items = items;
+        notifyDataSetChanged();
     }
 
     static class CallViewHolder extends RecyclerView.ViewHolder {

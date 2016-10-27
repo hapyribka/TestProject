@@ -1,18 +1,16 @@
-package com.preggiapp.testproject.fragment;
+package com.preggiapp.testproject.gui.base;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.preggiapp.testproject.R;
-import com.preggiapp.testproject.activity.MainActivity;
-import com.preggiapp.testproject.network.callbacks.FragmentCallBack;
-import com.preggiapp.testproject.network.command.BaseCommand;
+import com.preggiapp.testproject.gui.activity.MainActivity;
 
-public abstract class BaseConnectionFragment extends BaseFragment implements FragmentCallBack {
+public abstract class BaseConnectionFragment extends BaseFragment implements MvpView {
 
-    public abstract void update();
+    public abstract BasePresenter getPresenter();
 
+/*
     @Override
     public void onLoadFinished(String error) {
         stopProgressDialog();
@@ -23,15 +21,7 @@ public abstract class BaseConnectionFragment extends BaseFragment implements Fra
         }
         update();
     }
-
-    public void startConnection(BaseCommand command) {
-        if (!isOnline()) {
-            Toast.makeText(getActivity().getApplicationContext(), getString(R.string.no_network_error), Toast.LENGTH_LONG).show();
-            return;
-        }
-        startProgressDialog();
-        command.execute();
-    }
+*/
 
     public void startProgressDialog() {
         if(commonView != null) {
@@ -49,6 +39,16 @@ public abstract class BaseConnectionFragment extends BaseFragment implements Fra
                 progress.setVisibility(View.INVISIBLE);
             }
         }
+    }
+
+    @Override
+    public void showToast(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public String getStringRes(int stringId) {
+        return getString(stringId);
     }
 
     public boolean isOnline() {
