@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ChartView">
+        <attr name="bg_color" format="color"/>
+        <attr name="chart_color" format="color"/>
+        <attr name="axle_color" format="color"/>
+    </declare-styleable>
+</resources>

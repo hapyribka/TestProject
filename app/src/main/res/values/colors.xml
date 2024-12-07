@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="base_color">#B30303</color>
+    <color name="text_color">#000000</color>
+    <color name="hint_text_color">#818181</color>
+    <color name="chart_bg_color">#aaaaaa</color>
+    <color name="chart_axle_color">#00ff00</color>
+</resources>

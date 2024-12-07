@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Charts</string>
+    <string name="start">Поехали...</string>
+    <string name="save">Сохранить</string>
+    <string name="count">Количество</string>
+    <string name="count_points">Количество точек</string>
+
+    <string name="error_wrong_format">Введено неверное число</string>
+    <string name="error_network">Сетевая ошибка.</string>
+    <string name="error_save_to_file">Не удалось сохранить в файл.</string>
+    <string name="error_empty_point_list">Получен пустой список точек</string>
+
+</resources>
